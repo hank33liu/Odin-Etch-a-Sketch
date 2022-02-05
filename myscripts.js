@@ -4,8 +4,8 @@ let sideLengthPercentage = 100/sideLength; //Percent of board side each row/col 
 let sideLengthPercentageString = ''; //String holding the input to CSS 
 const board = document.querySelector(".board"); //Set board const
 
-///////////////////////////
-///////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 //Function that updates pixelCount and sideLengthPercentage when slider is adjusted
 //Also sets sideLengthPercentageString back to empty
@@ -38,21 +38,48 @@ function setBoardSize(){
     }
 setBoardSize();
 
+//Function that resets the board to its default state
+function resetBoard() {
+    sideLength = 10;
+    pixelCount = sideLength*sideLength;
+    sideLengthPercentage = 100/sideLength;
+    sideLengthPercentageString = '';
+    slider.value = 10;
+    sliderBoardAdjust();
+}
+const resetButton = document.getElementById("resetButton");
+resetButton.addEventListener("click", resetBoard);
+
+
+
+
+
+
+/////////////////////////////////////////////////
 //For the slider
-var slider = document.getElementById("pixelRange");
-var output = document.getElementById("slideValue");
+const slider = document.getElementById("pixelRange");
+const output = document.getElementById("slideValue");
 output.textContent = `${slider.value} x ${slider.value}`; // Display the default slider value
 
+//Function that updates board when slider is adjusted
+function sliderBoardAdjust() {
+    output.textContent = `${slider.value} x ${slider.value}`;
+    sideLength = slider.value;
+    board.textContent = '';
+    updateBoardSize();
+    addPixels();
+    setBoardSize();
+}
 
-// Function that updates the current slider value (each time you drag the slider handle)
+
+
 //Sets new board size
 //Then removes all pixels and adds in the new appropriate amount
-slider.oninput = function() {
-  output.textContent = `${this.value} x ${this.value}`;
-  sideLength = this.value;
-  board.textContent = '';
-  updateBoardSize();
-  addPixels();
-  setBoardSize();
+//slider.oninput = sliderBoardAdjust(slider);
+slider.oninput = function () {sliderBoardAdjust(slider)};
 
+
+//FOr testing
+function logsMoved() {
+    console.log('moved');
 }
