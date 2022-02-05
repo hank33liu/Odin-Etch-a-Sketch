@@ -1,0 +1,33 @@
+.main {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: center;
+    background-color: red;
+}
+
+.header {
+    font-size: 70px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: orange;
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: yellow;
+}
+
+.board {
+    display: grid;
+    box-sizing: border-box;
+    width: 40%;
+    height: 40vw;
+    grid-template: 33.3% 33.3% 33.3% / 33.3% 33.3% 33.3%;
+    background-color: green;
+}
+
+.pixel {
+    border: 1px solid black;
+}
