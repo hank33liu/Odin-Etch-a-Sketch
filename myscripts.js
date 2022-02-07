@@ -21,6 +21,7 @@ function addPixels() {
     for (var i=0; i < pixelCount; i++) {
         pixelDivs[i] = document.createElement('div');
         pixelDivs[i].className = 'pixel';
+        pixelDivs[i].addEventListener("mouseover", function() { this.className='pixel coloredPixel';});
         board.appendChild(pixelDivs[i]);
     }
 }
