@@ -38,6 +38,13 @@ function addPixels() {
                 }
             };
         });
+        pixelDivs[i].addEventListener("mousedown", function() {
+            if (toggle.checked === false) {
+                this.className='pixel coloredPixel';
+                } else {
+                    this.className='pixel';
+                }
+        });
         pixelDivs[i].addEventListener("click", function() {
             if (toggle.checked === false) {
                 this.className='pixel coloredPixel';
