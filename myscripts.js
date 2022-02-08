@@ -31,11 +31,19 @@ function addPixels() {
         pixelDivs[i].className = 'pixel';
         pixelDivs[i].addEventListener("mouseenter", function() {
             if (isMouseClicked===true) {
+                if (toggle.checked === false) {
                 this.className='pixel coloredPixel';
+                } else {
+                    this.className='pixel';
+                }
             };
         });
         pixelDivs[i].addEventListener("click", function() {
+            if (toggle.checked === false) {
                 this.className='pixel coloredPixel';
+                } else {
+                    this.className='pixel';
+                }
         });
         board.appendChild(pixelDivs[i]);
     }
@@ -91,15 +99,20 @@ function sliderBoardAdjust() {
     setBoardSize();
 }
 
-
-
 //Sets new board size
 //Then removes all pixels and adds in the new appropriate amount
 //slider.oninput = sliderBoardAdjust(slider);
 slider.oninput = function () {sliderBoardAdjust(slider)};
 
+//For the toggle
+const toggle = document.querySelector("#eraserCheckbox");
+const toggleValue = document.querySelector("#toggleValue");
+toggleValue.textContent = 'Draw Mode'; // Display the default toggle value
 
-//FOr testing
-function logsMoved() {
-    console.log('moved');
-}
+toggle.addEventListener('change', function() {
+    if (this.checked) {
+        toggleValue.textContent = 'Eraser Mode';
+    } else {
+        toggleValue.textContent = 'Draw Mode';
+    }
+  });
