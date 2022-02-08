@@ -2,10 +2,18 @@ let sideLength = 10; //Length of board's side, use a slider to adjust later
 let pixelCount = sideLength*sideLength; //Total number of pixels in the board
 let sideLengthPercentage = 100/sideLength; //Percent of board side each row/col takes up
 let sideLengthPercentageString = ''; //String holding the input to CSS 
+let isMouseClicked = false; //Global check to see if mouseover should be applied
 const board = document.querySelector(".board"); //Set board const
 
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
+
+//Catches case of clicking in board, leaving, which would case mouseup to never be caught
+// board.addEventListener("mouseleave", function() {isMouseClicked = false;});
+document.addEventListener("mousedown", function() {isMouseClicked=true;});
+document.addEventListener("mouseup", function() {isMouseClicked=false;});
+document.addEventListener("dragstart", function() {isMouseClicked=true;});
+document.addEventListener("dragover", function() {isMouseClicked=false;});
 
 //Function that updates pixelCount and sideLengthPercentage when slider is adjusted
 //Also sets sideLengthPercentageString back to empty
@@ -21,7 +29,14 @@ function addPixels() {
     for (var i=0; i < pixelCount; i++) {
         pixelDivs[i] = document.createElement('div');
         pixelDivs[i].className = 'pixel';
-        pixelDivs[i].addEventListener("mouseover", function() { this.className='pixel coloredPixel';});
+        pixelDivs[i].addEventListener("mouseenter", function() {
+            if (isMouseClicked===true) {
+                this.className='pixel coloredPixel';
+            };
+        });
+        pixelDivs[i].addEventListener("click", function() {
+                this.className='pixel coloredPixel';
+        });
         board.appendChild(pixelDivs[i]);
     }
 }
@@ -50,6 +65,10 @@ function resetBoard() {
 }
 const resetButton = document.getElementById("resetButton");
 resetButton.addEventListener("click", resetBoard);
+
+//Button clears all pixels but does not resize board
+const clearButton = document.getElementById("clearButton");
+clearButton.addEventListener("click", sliderBoardAdjust);
 
 
 

@@ -22,6 +22,9 @@
 }
 
 .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-right: 50px;
 }
 
@@ -42,8 +45,13 @@
     background-color: black;
 }
 
+#clearButton {
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
 /* For the slider */
-slidecontainer {
+.slidecontainer {
     width: 100%; /* Width of the outside container */
   }
   
